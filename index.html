@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 25 Wednesday Practice Quiz</title>
+    <style>
+        /* --- CSS Variables & Themes --- */
+        :root {
+            /* Base Transition */
+            --transition-speed: 0.3s;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 1. Modern Dark (Default) */
+        [data-theme="dark"] {
+            --bg-body: #1e293b;
+            --bg-card: #334155;
+            --bg-header: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-accent: #38bdf8;
+            --border-color: #475569;
+            --highlight-bg: #475569;
+            --button-bg: #38bdf8;
+            --button-text: #0f172a;
+            --button-hover: #0ea5e9;
+            --feedback-success-bg: #064e3b;
+            --feedback-success-border: #059669;
+            --feedback-success-text: #a7f3d0;
+            --feedback-error-bg: #7f1d1d;
+            --feedback-error-border: #dc2626;
+            --feedback-error-text: #fecaca;
+        }
+
+        /* 2. Modern Light */
+        [data-theme="light"] {
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --text-accent: #2563eb;
+            --border-color: #e5e7eb;
+            --highlight-bg: #f3f4f6;
+            --button-bg: #2563eb;
+            --button-text: #ffffff;
+            --button-hover: #1d4ed8;
+            --feedback-success-bg: #ecfdf5;
+            --feedback-success-border: #34d399;
+            --feedback-success-text: #065f46;
+            --feedback-error-bg: #fef2f2;
+            --feedback-error-border: #f87171;
+            --feedback-error-text: #991b1b;
+        }
+
+        /* 3. Midnight (Pure Black) */
+        [data-theme="midnight"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --text-accent: #90caf9;
+            --border-color: #333333;
+            --highlight-bg: #1a1a1a;
+            --button-bg: #90caf9;
+            --button-text: #000000;
+            --button-hover: #42a5f5;
+            --feedback-success-bg: #051b11;
+            --feedback-success-border: #0f5132;
+            --feedback-success-text: #75b798;
+            --feedback-error-bg: #2c0b0e;
+            --feedback-error-border: #842029;
+            --feedback-error-text: #ea868f;
+        }
+
+        /* 4. Legacy Dark (Original) */
+        [data-theme="legacy-dark"] {
+            --bg-body: #2d343e;
+            --bg-card: #3c424f;
+            --bg-header: #3c424f;
+            --text-main: #e8e6e3;
+            --text-muted: #b0c4de;
+            --text-accent: #8ab4f8;
+            --border-color: #555;
+            --highlight-bg: #454c5a;
+            --button-bg: #8ab4f8;
+            --button-text: #202124;
+            --button-hover: #a3c5f9;
+            --feedback-success-bg: #344e41;
+            --feedback-success-border: #52b788;
+            --feedback-success-text: #c7f9cc;
+            --feedback-error-bg: #5e2129;
+            --feedback-error-border: #a4133c;
+            --feedback-error-text: #f8d7da;
+        }
+
+        /* 5. Sepia (Reading Mode) */
+        [data-theme="sepia"] {
+            --bg-body: #f4ecd8;
+            --bg-card: #fdf6e3;
+            --bg-header: #e4d5b7;
+            --text-main: #433422;
+            --text-muted: #7c6f5a;
+            --text-accent: #a05a2c;
+            --border-color: #d3c4a5;
+            --highlight-bg: #ebe1c9;
+            --button-bg: #a05a2c;
+            --button-text: #fdf6e3;
+            --button-hover: #864822;
+            --feedback-success-bg: #e6f4ea;
+            --feedback-success-border: #8ab893;
+            --feedback-success-text: #2e4c35;
+            --feedback-error-bg: #f9e3e3;
+            --feedback-error-border: #d48f8f;
+            --feedback-error-text: #5c2b2b;
+        }
+
+        /* 6. High Contrast */
+        [data-theme="contrast"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #ffffff;
+            --text-muted: #dddddd;
+            --text-accent: #ffff00;
+            --border-color: #ffffff;
+            --highlight-bg: #333333;
+            --button-bg: #ffff00;
+            --button-text: #000000;
+            --button-hover: #e6e600;
+            --feedback-success-bg: #000000;
+            --feedback-success-border: #00ff00;
+            --feedback-success-text: #00ff00;
+            --feedback-error-bg: #000000;
+            --feedback-error-border: #ff0000;
+            --feedback-error-text: #ff0000;
+        }
+
+        /* --- Global Reset & Layout --- */
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Default to Sticky */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Class to remove sticky behavior */
+        header.unpinned {
+            position: relative;
+            box-shadow: none;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--text-accent);
+        }
+
+        .controls-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pin-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .pin-btn:hover {
+            background-color: var(--highlight-bg);
+        }
+
+        .pin-btn.pin-active {
+            color: var(--text-accent);
+            border-color: var(--text-accent);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        select#theme-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* --- Main Content --- */
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem 4rem 1rem;
+        }
+
+        .section-header {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-accent);
+            color: var(--text-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* --- Question Card --- */
+        .question-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .lo-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--text-accent);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Options --- */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: var(--highlight-bg);
+            border-color: var(--text-muted);
+        }
+
+        .option-label input {
+            margin-top: 0.3rem;
+            margin-right: 1rem;
+            accent-color: var(--text-accent);
+            transform: scale(1.2);
+        }
+
+        /* --- Buttons --- */
+        .btn-check {
+            margin-top: 1.5rem;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-check:hover {
+            opacity: 0.9;
+        }
+
+        /* --- Feedback Area --- */
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+            border: 1px solid transparent;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background-color: var(--feedback-success-bg);
+            border-color: var(--feedback-success-border);
+            color: var(--feedback-success-text);
+        }
+
+        .feedback.incorrect {
+            background-color: var(--feedback-error-bg);
+            border-color: var(--feedback-error-border);
+            color: var(--feedback-error-text);
+        }
+
+        .feedback-header {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .rationale {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .source {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: italic;
+            border-top: 1px dashed currentColor;
+            padding-top: 0.5rem;
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 600px) {
+            header { padding: 1rem; flex-direction: column; gap: 10px; align-items: flex-start; }
+            .controls-wrapper { width: 100%; justify-content: space-between; }
+            .question-card { padding: 1.5rem; }
+            header h1 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <h1>Week 25 Wednesday Practice Quiz</h1>
+        <div class="controls-wrapper">
+            <!-- Pin Button -->
+            <button class="pin-btn pin-active" id="pin-btn" onclick="toggleHeader()" title="Pin/Unpin Header">
+                📍
+            </button>
+            
+            <div class="theme-control">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select" onchange="changeTheme(this.value)">
+                    <option value="dark">Modern Dark</option>
+                    <option value="midnight">Midnight</option>
+                    <option value="light">Modern Light</option>
+                    <option value="legacy-dark">Legacy Dark</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="contrast">High Contrast</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="quiz-root">
+        <!-- Content injected via JS -->
+    </div>
+
+    <script>
+        // --- Data ---
+        const quizData = [
+            // --- Section 1: Infection in the Neutropenic Patient ---
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO1: Define [condition].",
+                fullLO: "LO1: Define neutropenia",
+                question: "A 45-year-old female undergoing chemotherapy for breast cancer has a complete blood count (CBC) drawn. The total white blood cell count is 2,000/µL. The differential shows 15% polymorphonuclear leukocytes (polys) and 5% bands. Which of the following terms best classifies this patient's hematologic status?",
+                options: {
+                    A: "Mild neutropenia",
+                    B: "Moderate neutropenia",
+                    C: "Normal neutrophil count",
+                    D: "Profound neutropenia",
+                    E: "Severe lymphopenia"
+                },
+                correctAnswer: "B",
+                rationale: "The Absolute Neutrophil Count (ANC) is calculated as Total WBC x % (polys + bands). Here, 2000 x (0.15 + 0.05) = 400/µL. The text defines Moderate as < 500. Therefore, the answer is B (Moderate neutropenia).",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 1: \"Absolute neutrophil count = Total WBC/µL x % of polys + bands (eg 2000/µL x 0.2 = 400/µL) ... Moderate neutropenia: ANC < 500/µL\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO1: Define [condition].",
+                fullLO: "LO1: Define neutropenia",
+                question: "A 62-year-old male with acute myeloid leukemia is admitted for induction chemotherapy. His daily labs reveal an absolute neutrophil count (ANC) of 80/µL. This specific laboratory value places the patient at the highest risk for which of the following complications?",
+                options: {
+                    A: "Bacterial pneumonia due to S. pneumoniae",
+                    B: "Invasive fungal infection",
+                    C: "Parasitic infection",
+                    D: "Viral meningitis",
+                    E: "Vitamin B12 deficiency"
+                },
+                correctAnswer: "B",
+                rationale: "An ANC of < 100/µL is defined as profound neutropenia. The slides indicate that the risk for late-onset lung infections, often fungal (specifically Aspergillus), is greatest with an ANC of less than 100/µL for a duration greater than 1 week.",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 1 and 5: \"Profound neutropenia: ANC < 100/µL.\" and \"Late-onset lung infections often fungal; risk greatest with ANC of less than 100/µL for duration > 1wk\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO1: Define [condition].",
+                fullLO: "LO1: Define neutropenia",
+                question: "A patient presents for cycle 2 of chemotherapy. The nurse calculates the Absolute Neutrophil Count (ANC) to determine if treatment can proceed. The calculated ANC is 1,200/µL. How is this level of neutropenia classified?",
+                options: {
+                    A: "Mild neutropenia",
+                    B: "Moderate neutropenia",
+                    C: "Normal limits",
+                    D: "Profound neutropenia",
+                    E: "Severe neutropenia"
+                },
+                correctAnswer: "A",
+                rationale: "The text defines mild neutropenia as an ANC between 1000 and 1500/µL.",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 1: \"Mild neutropenia: absolute neutrophil count (ANC) 1000-1500/µL\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO2: Define fever in a [specific patient population].",
+                fullLO: "LO2: Define fever in a neutropenic patient",
+                question: "A 55-year-old patient with lymphoma and a current ANC of 450/µL is being monitored on the ward. The nurse records a single oral temperature of 38.4°C (101.1°F). The patient feels slightly flushed but has no other complaints. What is the most appropriate interpretation of this clinical finding?",
+                options: {
+                    A: "It is likely a drug fever and requires no action.",
+                    B: "It is a sign of infection requiring urgent assessment.",
+                    C: "It is below the threshold for defining fever in neutropenia.",
+                    D: "It requires monitoring for one hour to see if it persists.",
+                    E: "It suggests tumor lysis syndrome."
+                },
+                correctAnswer: "B",
+                rationale: "Fever in a neutropenic patient is defined as a single oral temp > 38.3°C. It is almost always a sign of infection and is considered a medical emergency.",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 1 and 6: \"Fever: single oral temp of > 38.3oC (101oF) lasting 1h... Almost always a sign of infection in a neutropenic patient!!\" and \"Fever in neutropenia: medical emergency\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO2: Define fever in a [specific patient population].",
+                fullLO: "LO2: Define fever in a neutropenic patient",
+                question: "A patient with leukemia has an ANC of 300/µL. At 14:00, their temperature is 38.1°C (100.6°F). At 15:30, the temperature is 38.2°C (100.8°F). Which of the following best describes this clinical scenario?",
+                options: {
+                    A: "Definition of fever in a neutropenic patient has been met.",
+                    B: "Definition of fever requires a single spike > 39.0°C.",
+                    C: "This is considered a low-grade fever not requiring workup.",
+                    D: "This pattern is diagnostic of fungal infection.",
+                    E: "This pattern suggests viral etiology only."
+                },
+                correctAnswer: "A",
+                rationale: "The definition of fever includes a temperature > 38°C (100.4°F) twice in a row over 2 hours in a neutropenic patient.",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 1: \"> 38oC (100.4oF)—twice in a row over 2 hours in the neutropenic pt\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO2: Define fever in a [specific patient population].",
+                fullLO: "LO2: Define fever in a neutropenic patient",
+                question: "A 28-year-old male receiving chemotherapy for testicular cancer calls the clinic. He reports feeling \"warm.\" His ANC is known to be 50/µL. He takes his temperature once, and it reads 38.5°C (101.3°F). What is the immediate clinical classification of this finding?",
+                options: {
+                    A: "Fever of unknown origin (FUO)",
+                    B: "Medical emergency",
+                    C: "Normal variation",
+                    D: "Tumor fever",
+                    E: "Viral syndrome"
+                },
+                correctAnswer: "B",
+                rationale: "Fever in neutropenia is a medical emergency with mortality of up to 70% if treatment is delayed. A single temp >38.3°C meets the definition.",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 6: \"Fever in neutropenia: medical emergency (mortality of up to 70%) if Rx delayed.\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO3: List the main pathogens which cause fever in [specific patient population].",
+                fullLO: "LO3: List the main viral, bacterial, and fungal pathogens which cause fever in neutropenic patients",
+                question: "A 63-year-old man with AML and profound neutropenia (<100/µL) develops a tender, rounded, 2-cm eschar on his wrist that is dark and sunken in the center. He has a fever refractory to initial antibiotics. Which organism is the most likely cause of this skin lesion?",
+                options: {
+                    A: "Aspergillus fumigatus",
+                    B: "Candida albicans",
+                    C: "Pseudomonas aeruginosa",
+                    D: "Staphylococcus aureus",
+                    E: "Streptococcus pneumoniae"
+                },
+                correctAnswer: "A",
+                rationale: "While Pseudomonas causes Ecthyma gangrenosum, the clinical vignette described in the slides (rounded, tender eschar on leg/wrist) in a patient with profound neutropenia and refractory fever is identified as Aspergillus. Angioinvasive mould infections can resemble ecthyma gangrenosum.",
+                source: "Infection_in_Neutropenia_Slides.pdf, Slides 17-18 and Page 4: \"A 55-year-old man with AML... developed a rounded, tender, eschar on his leg along with fever refractory to antibiotics. Diagnosis? Aspergillus\" and \"Angioinvasive mould infections can resemble ecthyma gangrenosum\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO3: List the main pathogens which cause fever in [specific patient population].",
+                fullLO: "LO3: List the main viral, bacterial, and fungal pathogens which cause fever in neutropenic patients",
+                question: "A 45-year-old woman with breast cancer and neutropenia presents with fever. She has a central venous catheter. Blood cultures are drawn. Based on epidemiology from the 2000s to present, which category of bacteria is she most likely infected with?",
+                options: {
+                    A: "Anaerobes",
+                    B: "Gram-positive cocci",
+                    C: "Gram-negative cocci",
+                    D: "Mycobacteria",
+                    E: "Spirochetes"
+                },
+                correctAnswer: "B",
+                rationale: "In the 2000s, Gram (+) cocci (especially Staph and Enterococcus) and Gram-negative bacteria became the dominant pathogens. Gram (+) and Gram (-) are now equal distribution (>50%).",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 2: \"2000s: Gram (+) cocci (esp Staph & Enterococcus) & Gram-negative bacteria\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO3: List the main pathogens which cause fever in [specific patient population].",
+                fullLO: "LO3: List the main viral, bacterial, and fungal pathogens which cause fever in neutropenic patients",
+                question: "A patient with prolonged neutropenia (>1 week) presents with a dry cough and fever. A CT scan of the chest reveals a nodule with a surrounding \"halo sign.\" Which pathogen is the most likely etiology?",
+                options: {
+                    A: "Aspergillus spp",
+                    B: "Candida spp",
+                    C: "Pneumocystis jiroveci",
+                    D: "Pseudomonas aeruginosa",
+                    E: "Staphylococcus aureus"
+                },
+                correctAnswer: "A",
+                rationale: "Aspergillus is the #1 cause of fungal infections in neutropenia. The \"halo sign\" (nodule with surrounding hazy increased markings) on CT is highly suggestive of Aspergillus.",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 5: \"Most common fungi are Aspergillus spp... CT: nodular--halo sign... highly suggestive of Aspergillus\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO4: Outline a logical approach to diagnosis in [specific patient population].",
+                fullLO: "LO4: Outline a logical approach to diagnosis in febrile, neutropenic patients",
+                question: "A 50-year-old patient with neutropenia presents with fever. As part of the risk assessment, the physician calculates the Multinational Association for Supportive Care in Cancer (MASCC) score. The patient scores a 24. How should this patient be managed based on this score?",
+                options: {
+                    A: "Admission to ICU for vasopressors",
+                    B: "High risk; admit for IV vancomycin",
+                    C: "High risk; admit for IV voriconazole",
+                    D: "Low risk; consider for oral antibiotics",
+                    E: "Low risk; no antibiotics required"
+                },
+                correctAnswer: "D",
+                rationale: "A MASCC score ≥ 21 indicates a low risk of early mortality, and the patient may be considered for oral antibiotics.",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 6: \"≥ 21 points--low risk of early mortality (? oral antibiotics) may be considered for treatment.\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO4: Outline a logical approach to diagnosis in [specific patient population].",
+                fullLO: "LO4: Outline a logical approach to diagnosis in febrile, neutropenic patients",
+                question: "A patient with AML and neutropenia develops right lower quadrant abdominal pain, diarrhea, and distention. A CT scan shows bowel wall thickening (>4mm) and fat stranding in the cecum. What is the most likely diagnosis?",
+                options: {
+                    A: "Appendicitis",
+                    B: "Clostridium difficile colitis",
+                    C: "Diverticulitis",
+                    D: "Ischemic colitis",
+                    E: "Typhlitis (Necrotizing enterocolitis)"
+                },
+                correctAnswer: "E",
+                rationale: "Typhlitis (necrotizing enterocolitis) is seen especially in AML during chemotherapy. It involves the cecum and presents with RLQ pain and distention. CT shows bowel wall thickening and fat stranding.",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 4: \"Necrotizing enterocolitis or typhlitis—esp in AML during chemotherapy... cecum usual target... CT scan: bowel wall thickening, surrounding fat stranding\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO4: Outline a logical approach to diagnosis in [specific patient population].",
+                fullLO: "LO4: Outline a logical approach to diagnosis in febrile, neutropenic patients",
+                question: "A neutropenic patient has persistent fever despite 5 days of broad-spectrum antibiotics. A search for a fungal source is initiated. Which serum antigen test is useful for detecting Aspergillus?",
+                options: {
+                    A: "1,3-beta-D-glucan",
+                    B: "Cryptococcal antigen",
+                    C: "Galactomannan",
+                    D: "Histoplasma antigen",
+                    E: "Procalcitonin"
+                },
+                correctAnswer: "C",
+                rationale: "Galactomannan Ag in serum has a sensitivity of 70% for Aspergillus. Beta-D-glucan is used for Candida.",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 5: \"galactomannan Ag in serum (sens 70%) & BAL fluid (> 80%)\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO5: Outline the principles of empirical therapy in [specific patient population].",
+                fullLO: "LO5: Outline the principles of empirical therapy in febrile, neutropenic patients",
+                question: "A patient with high-risk febrile neutropenia is admitted to the hospital. Which of the following is the most appropriate initial empirical antibiotic regimen?",
+                options: {
+                    A: "Oral ciprofloxacin + amoxicillin/clavulanate",
+                    B: "IV vancomycin monotherapy",
+                    C: "IV monotherapy with an anti-pseudomonal beta-lactam (e.g., cefepime)",
+                    D: "IV fluconazole monotherapy",
+                    E: "IV gentamicin monotherapy"
+                },
+                correctAnswer: "C",
+                rationale: "High-risk patients require hospitalization and IV antibiotics. The recommended regimen is monotherapy with an anti-Pseudomonal beta-lactam such as pip/tazo, cefepime, or meropenem.",
+                source: "Infection_in_Neutropenia_Slides.pdf, Slide 53: \"Rx: monotherapy with anti-Pseudomonal β-lactam pip/tazo, cefepime, meropenem\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO5: Outline the principles of empirical therapy in [specific patient population].",
+                fullLO: "LO5: Outline the principles of empirical therapy in febrile, neutropenic patients",
+                question: "A neutropenic patient remains febrile after 5 days of broad-spectrum antibacterial therapy. No bacterial source has been identified. What is the most appropriate modification to the treatment regimen?",
+                options: {
+                    A: "Add empiric antifungal therapy (e.g., voriconazole)",
+                    B: "Change antibiotics to oral levofloxacin",
+                    C: "Discontinue all antimicrobials and observe",
+                    D: "Double the dose of the current beta-lactam",
+                    E: "Add corticosteroids"
+                },
+                correctAnswer: "A",
+                rationale: "For persistent fever (4-7 days) without an identified source, fungal infection (especially Aspergillus) should be strongly considered, and antifungal therapy (voriconazole or L-AmB) should be added.",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 7: \"Neutropenic patient with persistent fever after 4-7d → voriconazole & continue Abx\""
+            },
+            {
+                section: "Infection in the Neutropenic Patient",
+                maskedLO: "LO5: Outline the principles of empirical therapy in [specific patient population].",
+                fullLO: "LO5: Outline the principles of empirical therapy in febrile, neutropenic patients",
+                question: "A patient with documented Gram-negative bacillus bacteremia has been treated, and the fever has resolved. The patient remains neutropenic with an ANC of 200/µL. How long should antibiotics be continued?",
+                options: {
+                    A: "For 7 days total, regardless of ANC",
+                    B: "Until the blood cultures are negative for 24 hours",
+                    C: "Until the ANC is ≥ 500/µL",
+                    D: "Until the fever resolves for 24 hours",
+                    E: "Until hospital discharge"
+                },
+                correctAnswer: "C",
+                rationale: "The duration of antibiotics in documented infection is dictated by the organism and site, but must be continued at least until the ANC is ≥ 500/µL.",
+                source: "Infections_in_the_Neutropenic_Patient_Text.pdf, Page 7: \"Duration of Abx in documented infection: until the ANC ≥ 500/µL (or longer based on organism or infection site)\""
+            },
+
+            // --- Section 2: Transfusion Medicine & Stem Cell Therapy ---
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO1: Be able to use appropriate blood component for clinical need: [Component A]",
+                fullLO: "LO1: Be able to use appropriate blood component for clinical need: RBCs",
+                question: "A 70-year-old male is in the ICU with symptomatic anemia. His hemoglobin is 6.5 g/dL. The physician orders a transfusion of Red Blood Cells (RBCs). What is the expected physiological effect of transfusing one unit of RBCs in this 70 kg patient?",
+                options: {
+                    A: "Increase Hematocrit by 5%",
+                    B: "Increase Hemoglobin by 1 g/dL",
+                    C: "Increase Platelet count by 10,000/uL",
+                    D: "Increase volume by 500 mL",
+                    E: "Restore coagulation factors to 50%"
+                },
+                correctAnswer: "B",
+                rationale: "In a 70 kg patient, 1 Unit of RBCs should increase the Hemoglobin by 1 g/dL.",
+                source: "Transfusion_Medicine_PDF.pdf, Page 7: \"70 kg pt: 1 U should increase Hgb by 1 g/dL\""
+            },
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO1: Be able to use appropriate blood component for clinical need: [Component B]",
+                fullLO: "LO1: Be able to use appropriate blood component for clinical need: Platelets",
+                question: "A patient with leukemia has a platelet count of 8,000/uL. He is scheduled for the placement of a central venous line. According to standard indications, what is the target platelet count threshold for this minor surgical procedure?",
+                options: {
+                    A: "> 10,000/uL",
+                    B: "> 20,000 - 50,000/uL",
+                    C: "> 50,000/uL",
+                    D: "> 100,000/uL",
+                    E: "Normal range (150,000/uL)"
+                },
+                correctAnswer: "B",
+                rationale: "The indication for line placement or minor surgery is a platelet count of 20,000 - 50,000/uL. (Note: Major surgery is >50k, Neuroaxis is >100k).",
+                source: "Transfusion_Medicine_PDF.pdf, Page 10: \"Line placement / minor surgery Plt < 20 - 50,000/uL\""
+            },
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO1: Be able to use appropriate blood component for clinical need: [Component C]",
+                fullLO: "LO1: Be able to use appropriate blood component for clinical need: Plasma",
+                question: "A patient presents with an INR of 8.0 and active bleeding due to warfarin overdose. Immediate reversal is required. While vitamin K is administered, which blood component is indicated to replace coagulation factors?",
+                options: {
+                    A: "Albumin",
+                    B: "Cryoprecipitate",
+                    C: "Fresh Frozen Plasma (FFP)",
+                    D: "Platelets",
+                    E: "Red Blood Cells"
+                },
+                correctAnswer: "C",
+                rationale: "FFP contains all clotting factors and is indicated for the reversal of warfarin overdose and coagulopathies.",
+                source: "Transfusion_Medicine_PDF.pdf, Page 12: \"Indications... Reversal of warfarin overdose\""
+            },
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO1: Be able to use appropriate blood component for clinical need: [Component D]",
+                fullLO: "LO1: Be able to use appropriate blood component for clinical need: Plasma Derivatives",
+                question: "A patient in the ICU develops Disseminated Intravascular Coagulation (DIC). Laboratory results show a fibrinogen level of 60 mg/dL. Which blood product is the most concentrated source of fibrinogen and is indicated for this patient?",
+                options: {
+                    A: "Albumin",
+                    B: "Cryoprecipitate",
+                    C: "Factor VIII concentrate",
+                    D: "Fresh Frozen Plasma",
+                    E: "Platelets"
+                },
+                correctAnswer: "B",
+                rationale: "Cryoprecipitate contains 150-250 mg of fibrinogen per unit and is indicated for patients with acquired hypofibrinogenemia, such as in DIC (< 100 mg/dL).",
+                source: "Transfusion_Medicine_PDF.pdf, Page 15: \"Patients with acquired hypofibrinogenemia, for example DIC (< 100 mg/dL) – most common clinical indication for cryoprecipitate\""
+            },
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO2: Understand the basic approach to a patient with massive hemorrhage.",
+                fullLO: "LO2: Understand the basic approach to a patient with massive hemorrhage",
+                question: "A trauma patient arrives with massive hemorrhage requiring the activation of the Massive Transfusion Protocol. According to current optimal resuscitation strategies, what is the recommended ratio of Packed RBCs to Plasma to Platelets?",
+                options: {
+                    A: "1:1:1",
+                    B: "2:1:0",
+                    C: "4:1:1",
+                    D: "4:2:1",
+                    E: "10:2:1"
+                },
+                correctAnswer: "A",
+                rationale: "The optimal ratio for massive transfusion is 1:1:1 (RBCs:Plasma:Platelets).",
+                source: "Transfusion_Medicine_PDF.pdf, Page 17: \"Optimal ratio: 1:1:1 (*)\""
+            },
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO2: Understand the basic approach to a patient with massive hemorrhage.",
+                fullLO: "LO2: Understand the basic approach to a patient with massive hemorrhage",
+                question: "In a massive transfusion scenario for a trauma patient with unknown blood type, which type of blood should be released for emergency use?",
+                options: {
+                    A: "A-positive",
+                    B: "AB-negative",
+                    C: "AB-positive",
+                    D: "O-negative",
+                    E: "O-positive"
+                },
+                correctAnswer: "D",
+                rationale: "Non-crossmatched O-negative blood is used for emergency release in massive transfusion protocols.",
+                source: "Transfusion_Medicine_PDF.pdf, Page 17: \"Non-crossmatched O-negative blood (emergency release)\""
+            },
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO2: Understand the basic approach to a patient with massive hemorrhage.",
+                fullLO: "LO2: Understand the basic approach to a patient with massive hemorrhage",
+                question: "In addition to blood components, which pharmacologic agent is considered a special consideration for use in massive transfusion protocols to stabilize clots?",
+                options: {
+                    A: "Aspirin",
+                    B: "Heparin",
+                    C: "Tranexamic acid (antifibrinolytic)",
+                    D: "Vitamin K",
+                    E: "Warfarin"
+                },
+                correctAnswer: "C",
+                rationale: "Antifibrinolytic agents like tranexamic acid or epsilon-aminocaproic acid are special considerations in massive transfusion.",
+                source: "Transfusion_Medicine_PDF.pdf, Page 17: \"Use antifibrinolytic agent (tranexamic acid/ε-aminocaproic acid)\""
+            },
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO3: Recognize the adverse events that may accompany transfusion.",
+                fullLO: "LO3: Recognize the adverse events that may accompany transfusion",
+                question: "A patient receiving a blood transfusion develops sudden severe dyspnea, hypotension, and fever. A chest X-ray shows bilateral non-cardiogenic pulmonary edema. This event occurred 2 hours after the transfusion began. What is the most likely diagnosis?",
+                options: {
+                    A: "Allergic Reaction",
+                    B: "Febrile Nonhemolytic Reaction",
+                    C: "Septic Reaction",
+                    D: "Transfusion-Associated Circulatory Overload (TACO)",
+                    E: "Transfusion Related Acute Lung Injury (TRALI)"
+                },
+                correctAnswer: "E",
+                rationale: "TRALI presents with severe dyspnea, hypotension, fever, and bilateral non-cardiogenic pulmonary edema within 6 hours of transfusion.",
+                source: "Transfusion_Medicine_PDF.pdf, Page 30: \"Transfusion Related Acute Lung Injury (TRALI)... Bilateral non-cardiogenic pulmonary edema... *occurs within 6 hrs of transfusion\""
+            },
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO3: Recognize the adverse events that may accompany transfusion.",
+                fullLO: "LO3: Recognize the adverse events that may accompany transfusion",
+                question: "During a transfusion, a patient complains of flank pain and the urine in the catheter bag turns red/brown (hemoglobinuria). The patient becomes hypotensive. This reaction is most likely caused by:",
+                options: {
+                    A: "Bacterial contamination of the unit",
+                    B: "Fluid overload",
+                    C: "IgA deficiency",
+                    D: "Transfusion of incompatible donor RBCs (ABO incompatibility)",
+                    E: "WBC cytokines"
+                },
+                correctAnswer: "D",
+                rationale: "Acute Hemolytic reactions are caused by the transfusion of incompatible donor RBCs (classically ABO). Symptoms include hypotension, flank/back pain, and hemoglobinuria.",
+                source: "Transfusion_Medicine_PDF.pdf, Page 22: \"Acute Hemolytic... Cause... Transfusion of incompatible donor RBCs into patient... Classically an ABO incompatibility\""
+            },
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO3: Recognize the adverse events that may accompany transfusion.",
+                fullLO: "LO3: Recognize the adverse events that may accompany transfusion",
+                question: "To prevent Transfusion-Associated Graft vs Host Disease (TAGvHD) in an immunocompromised patient (e.g., a Hodgkin lymphoma patient), blood products should undergo which modification?",
+                options: {
+                    A: "Freezing",
+                    B: "Irradiation",
+                    C: "Leukoreduction",
+                    D: "Volume reduction",
+                    E: "Washing"
+                },
+                correctAnswer: "B",
+                rationale: "Irradiation prevents lymphocyte proliferation and is the prevention method for TAGvHD in at-risk populations.",
+                source: "Transfusion_Medicine_PDF.pdf, Page 40: \"Prevention: Irradiation... Transfusion-associated graft versus host disease (TAGvHD)\""
+            },
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO4: Recognize the key considerations for stem cell therapy.",
+                fullLO: "LO4: Recognize the key considerations for stem cell therapy",
+                question: "A patient with Multiple Myeloma is being evaluated for a stem cell transplant. The cells will be collected from the patient during remission. This type of transplant is classified as:",
+                options: {
+                    A: "Allogeneic",
+                    B: "Autologous",
+                    C: "Haploidentical",
+                    D: "Syngeneic",
+                    E: "Xenograft"
+                },
+                correctAnswer: "B",
+                rationale: "Autologous transplants involve cells collected from the patient themselves, usually for diseases like multiple myeloma or low-grade lymphoma.",
+                source: "Transfusion_Medicine_PDF.pdf, Page 44: \"Autologous: (usually multiple myeloma or low-grade lymphoma)... Collected from patient at remission\""
+            },
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO4: Recognize the key considerations for stem cell therapy.",
+                fullLO: "LO4: Recognize the key considerations for stem cell therapy",
+                question: "A patient undergoes an allogeneic stem cell transplant. Post-transplant, the patient requires immunosuppression. What is the primary purpose of this immunosuppression in the context of an allogeneic transplant?",
+                options: {
+                    A: "To enhance engraftment speed",
+                    B: "To maintain balance between graft vs leukemia and graft vs host",
+                    C: "To prevent bacterial infection",
+                    D: "To prevent recurrence of the primary tumor",
+                    E: "To stimulate red blood cell production"
+                },
+                correctAnswer: "B",
+                rationale: "In allogeneic transplants, due to HLA mismatch, immunosuppression is required to maintain the balance between the beneficial graft vs leukemia effect and the harmful graft vs host disease.",
+                source: "Transfusion_Medicine_PDF.pdf, Page 45: \"Requires immunosuppression to maintain balance between graft vs leukemia and graft vs host\""
+            },
+            {
+                section: "Transfusion Medicine & Stem Cell Therapy",
+                maskedLO: "LO4: Recognize the key considerations for stem cell therapy.",
+                fullLO: "LO4: Recognize the key considerations for stem cell therapy",
+                question: "A novel therapy for Acute Lymphoblastic Leukemia involves collecting a patient's T-cells and modifying them to express a receptor that targets the CD19 antigen on tumor cells. This therapy is known as:",
+                options: {
+                    A: "Adoptive Cell Transfer",
+                    B: "Allogeneic Stem Cell Transplant",
+                    C: "CAR-T (Chimeric Antigen Receptor T-cell) therapy",
+                    D: "Monoclonal Antibody therapy",
+                    E: "Tumor-Infiltrating Lymphocyte therapy"
+                },
+                correctAnswer: "C",
+                rationale: "CAR-T therapy involves modifying T-cells to express CAR receptor proteins (like CD19) to target malignant cells.",
+                source: "Transfusion_Medicine_PDF.pdf, Pages 47 & 50: \"Stem Cell Therapies: CAR-T... Chimeric Antigen Receptor (CAR) T-cell therapy... CD19 for B cell malignancies\""
+            },
+
+            // --- Section 3: Cancer Chemotherapy ---
+            {
+                section: "Cancer Chemotherapy",
+                maskedLO: "LO1: Understand the well-known classes of chemotherapeutic drugs.",
+                fullLO: "LO1: Understand the well-known classes of chemotherapeutic drugs",
+                question: "A patient is prescribed cyclophosphamide. This drug belongs to which class of chemotherapeutic agents?",
+                options: {
+                    A: "Alkylating Agents",
+                    B: "Antibiotics",
+                    C: "Antimetabolites",
+                    D: "Drugs from Plants",
+                    E: "Hormonal Agents"
+                },
+                correctAnswer: "A",
+                rationale: "Cyclophosphamide is a Nitrogen Mustard, which is a subclass of Alkylating Agents.",
+                source: "Cancer_Chemotherapy_PDF.pdf, Page 7: \"1. Alkylating Agents... A. Nitrogen Mustards... Cyclophosphamide\""
+            },
+            {
+                section: "Cancer Chemotherapy",
+                maskedLO: "LO1: Understand the well-known classes of chemotherapeutic drugs.",
+                fullLO: "LO1: Understand the well-known classes of chemotherapeutic drugs",
+                question: "Which of the following drugs is classified as an antimetabolite that acts as a folic acid analog?",
+                options: {
+                    A: "Cisplatin",
+                    B: "Doxorubicin",
+                    C: "Fluorouracil (5-FU)",
+                    D: "Methotrexate (MTX)",
+                    E: "Vincristine"
+                },
+                correctAnswer: "D",
+                rationale: "Methotrexate is explicitly classified as a purine antimetabolite and is an analog of folic acid.",
+                source: "Cancer_Chemotherapy_PDF.pdf, Page 26: \"2. Antimetabolites... Purine antimetabolite: methotrexate (folic acid analog)\""
+            },
+            {
+                section: "Cancer Chemotherapy",
+                maskedLO: "LO1: Understand the well-known classes of chemotherapeutic drugs.",
+                fullLO: "LO1: Understand the well-known classes of chemotherapeutic drugs",
+                question: "Paclitaxel (Taxol®) is derived from the Pacific yew tree. To which class of chemotherapeutic drugs does it belong?",
+                options: {
+                    A: "Alkylating Agents",
+                    B: "Antibiotics",
+                    C: "Antimetabolites",
+                    D: "Drugs from Plants",
+                    E: "Proteasome Inhibitors"
+                },
+                correctAnswer: "D",
+                rationale: "Paclitaxel is listed under \"Drugs from Plants.\"",
+                source: "Cancer_Chemotherapy_PDF.pdf, Page 35: \"4. Drugs from Plants... Paclitaxel (Taxol®) - Pacific yew tree\""
+            },
+            {
+                section: "Cancer Chemotherapy",
+                maskedLO: "LO2: Describe the common mechanisms by which chemotherapeutic drugs in each class act to kill cancer cells.",
+                fullLO: "LO2: Describe the common mechanisms by which chemotherapeutic drugs in each class act to kill cancer cells",
+                question: "What is the primary mechanism of action of alkylating agents like nitrogen mustard?",
+                options: {
+                    A: "Binding to tubulin to inhibit polymerization",
+                    B: "Competitive inhibition of dihydrofolate reductase",
+                    C: "Covalent crosslinking of DNA causing cell cycle arrest",
+                    D: "Inhibition of the 26S proteasome",
+                    E: "Intercalation into DNA producing free radicals"
+                },
+                correctAnswer: "C",
+                rationale: "Alkylating agents form covalent crosslinks in DNA (specifically with Guanine), interfering with replication and causing arrest in all phases of the cell cycle.",
+                source: "Cancer_Chemotherapy_PDF.pdf, Page 5: \"Alkylating Agents... Crosslinked DNA... Interferes with DNA replication and causes cell cycle arrest\""
+            },
+            {
+                section: "Cancer Chemotherapy",
+                maskedLO: "LO2: Describe the common mechanisms by which chemotherapeutic drugs in each class act to kill cancer cells.",
+                fullLO: "LO2: Describe the common mechanisms by which chemotherapeutic drugs in each class act to kill cancer cells",
+                question: "Vincristine and Vinblastine exert their cytotoxic effect by:",
+                options: {
+                    A: "Binding to tubulin and inhibiting polymerization into microtubules",
+                    B: "Inhibiting topoisomerase II",
+                    C: "Stabilizing microtubules and preventing depolymerization",
+                    D: "Substituting for uracil in RNA synthesis",
+                    E: "Crosslinking DNA strands"
+                },
+                correctAnswer: "A",
+                rationale: "Vincristine/Vinblastine bind to tubulin and inhibit polymerization, blocking mitosis in metaphase. (Note: This is distinct from Paclitaxel which stabilizes microtubules).",
+                source: "Cancer_Chemotherapy_PDF.pdf, Page 37: \"Mechanism: binds to tubulin, inhibits tubulin polymerization into microtubules... M phase specific\""
+            },
+            {
+                section: "Cancer Chemotherapy",
+                maskedLO: "LO2: Describe the common mechanisms by which chemotherapeutic drugs in each class act to kill cancer cells.",
+                fullLO: "LO2: Describe the common mechanisms by which chemotherapeutic drugs in each class act to kill cancer cells",
+                question: "Doxorubicin (Adriamycin) acts primarily by which of the following mechanisms?",
+                options: {
+                    A: "Inhibiting DNA topoisomerase II and relaxing supercoils",
+                    B: "Inhibiting proteasomes",
+                    C: "Inhibiting thymidylate synthase",
+                    D: "Stabilizing microtubules",
+                    E: "Crosslinking DNA via platinum complexes"
+                },
+                correctAnswer: "A",
+                rationale: "Doxorubicin binds to nicked DNA via DNA topoisomerase II (TOP2), preventing resealing and stopping replication.",
+                source: "Cancer_Chemotherapy_PDF.pdf, Page 29: \"Mechanism: DNA topoisomerase II (TOP2) relaxes supercoils... Doxorubicin binds to nicked DNA and prevents the DNA double helix from being resealed\""
+            },
+            {
+                section: "Cancer Chemotherapy",
+                maskedLO: "LO3: Discuss the major side effects (i.e. toxicities) of chemotherapeutic drugs.",
+                fullLO: "LO3: Discuss the major side effects (i.e. toxicities) of chemotherapeutic drugs",
+                question: "A patient receiving chemotherapy develops hemorrhagic cystitis (\"bladder burn\"). Which drug is most likely responsible for this toxicity due to the metabolite acrolein?",
+                options: {
+                    A: "Bleomycin",
+                    B: "Cisplatin",
+                    C: "Cyclophosphamide",
+                    D: "Doxorubicin",
+                    E: "Vincristine"
+                },
+                correctAnswer: "C",
+                rationale: "Cyclophosphamide toxicity includes hemorrhagic cystitis or \"bladder burn\" caused by the metabolite acrolein.",
+                source: "Cancer_Chemotherapy_PDF.pdf, Pages 9 & 10: \"Toxicity... hemorrhagic cystitis, 'bladder burn'... acrolein\""
+            },
+            {
+                section: "Cancer Chemotherapy",
+                maskedLO: "LO3: Discuss the major side effects (i.e. toxicities) of chemotherapeutic drugs.",
+                fullLO: "LO3: Discuss the major side effects (i.e. toxicities) of chemotherapeutic drugs",
+                question: "A patient treated for testicular cancer presents with shortness of breath. Pulmonary function tests show restrictive lung disease consistent with pulmonary fibrosis. Which drug in his regimen is the most likely cause?",
+                options: {
+                    A: "Bleomycin",
+                    B: "Cisplatin",
+                    C: "Etoposide",
+                    D: "Vinblastine",
+                    E: "5-Fluorouracil"
+                },
+                correctAnswer: "A",
+                rationale: "Bleomycin is degraded by hydrolase which is low in the lungs, leading to pulmonary fibrosis in 5-10% of patients.",
+                source: "Cancer_Chemotherapy_PDF.pdf, Page 33: \"Bleomycin... Toxicity... Degraded by hydrolase which is low in: lungs - pulmonary fibrosis\""
+            },
+            {
+                section: "Cancer Chemotherapy",
+                maskedLO: "LO3: Discuss the major side effects (i.e. toxicities) of chemotherapeutic drugs.",
+                fullLO: "LO3: Discuss the major side effects (i.e. toxicities) of chemotherapeutic drugs",
+                question: "Doxorubicin use is limited by a specific cumulative dose-dependent toxicity involving which organ system?",
+                options: {
+                    A: "Auditory (Ototoxicity)",
+                    B: "Cardiac (Cardiomyopathy)",
+                    C: "Hepatic (Cirrhosis)",
+                    D: "Pulmonary (Fibrosis)",
+                    E: "Renal (Nephrotoxicity)"
+                },
+                correctAnswer: "B",
+                rationale: "Doxorubicin causes chronic cardiac toxicity (congestive heart failure) related to the total cumulative dose.",
+                source: "Cancer_Chemotherapy_PDF.pdf, Page 31: \"Doxorubicin... Chronic use: cardiac toxicity including congestive heart failure... related to total cumulative dose\""
+            },
+            {
+                section: "Cancer Chemotherapy",
+                maskedLO: "LO3: Discuss the major side effects (i.e. toxicities) of chemotherapeutic drugs.",
+                fullLO: "LO3: Discuss the major side effects (i.e. toxicities) of chemotherapeutic drugs",
+                question: "A patient treated with Cisplatin complains of ringing in the ears (tinnitus) and hearing loss. This represents which known toxicity of platinum complexes?",
+                options: {
+                    A: "Cardiotoxicity",
+                    B: "Hepatotoxicity",
+                    C: "Myelosuppression",
+                    D: "Ototoxicity",
+                    E: "Pulmonary fibrosis"
+                },
+                correctAnswer: "D",
+                rationale: "Cisplatin toxicity includes ototoxicity with high frequency hearing loss and tinnitus.",
+                source: "Cancer_Chemotherapy_PDF.pdf, Page 14: \"Cisplatin... Toxicity... ototoxicity with high frequency hearing loss and tinnitus\""
+            }
+        ];
+
+        // --- Core Logic ---
+        const quizRoot = document.getElementById('quiz-root');
+        const themeSelect = document.getElementById('theme-select');
+        const pinBtn = document.getElementById('pin-btn');
+        const mainHeader = document.getElementById('main-header');
+
+        function initQuiz() {
+            // Render Questions
+            let currentSection = "";
+            
+            quizData.forEach((item, index) => {
+                // Insert Section Header if needed
+                if (item.section !== currentSection) {
+                    currentSection = item.section;
+                    const sectionHeader = document.createElement('h2');
+                    sectionHeader.className = 'section-header';
+                    sectionHeader.textContent = currentSection;
+                    quizRoot.appendChild(sectionHeader);
+                }
+
+                // Create Card
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${index}`;
+
+                // Learning Objective (Masked)
+                const loBox = document.createElement('div');
+                loBox.className = 'lo-box';
+                loBox.id = `lo-${index}`;
+                loBox.textContent = item.maskedLO;
+                card.appendChild(loBox);
+
+                // Question Text
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.textContent = `${index + 1}. ${item.question}`;
+                card.appendChild(qText);
+
+                // Options Container
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+
+                for (const [key, value] of Object.entries(item.options)) {
+                    const label = document.createElement('label');
+                    label.className = 'option-label';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question-${index}`;
+                    input.value = key;
+
+                    const span = document.createElement('span');
+                    span.textContent = `${key}. ${value}`;
+
+                    label.appendChild(input);
+                    label.appendChild(span);
+                    optionsGrid.appendChild(label);
+                }
+                card.appendChild(optionsGrid);
+
+                // Check Button
+                const btn = document.createElement('button');
+                btn.className = 'btn-check';
+                btn.textContent = 'Check Answer';
+                btn.onclick = () => checkAnswer(index);
+                card.appendChild(btn);
+
+                // Feedback Container
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+                feedback.id = `feedback-${index}`;
+                card.appendChild(feedback);
+
+                quizRoot.appendChild(card);
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('quizTheme') || 'dark';
+            changeTheme(savedTheme);
+            themeSelect.value = savedTheme;
+
+            // Load saved pin state
+            const savedPinState = localStorage.getItem('headerPinned');
+            // Default to true (pinned) if not set or if set to true
+            if (savedPinState === 'false') {
+                toggleHeader(false); 
+            } else {
+                toggleHeader(true);
+            }
+        }
+
+        function checkAnswer(index) {
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            const feedbackEl = document.getElementById(`feedback-${index}`);
+            const loEl = document.getElementById(`lo-${index}`);
+            const data = quizData[index];
+
+            if (!selected) {
+                alert("Please select an answer.");
+                return;
+            }
+
+            // Reveal LO
+            loEl.textContent = data.fullLO;
+
+            // Generate Feedback HTML
+            const isCorrect = selected.value === data.correctAnswer;
+            
+            let html = `<span class="feedback-header">${isCorrect ? "Correct!" : "Incorrect"}</span>`;
+            if (!isCorrect) {
+                html += `<div>The correct answer is <strong>${data.correctAnswer}</strong>.</div>`;
+            }
+            
+            html += `<div class="rationale"><strong>Rationale:</strong> ${data.rationale}</div>`;
+            html += `<div class="source"><strong>Source:</strong> ${data.source}</div>`;
+
+            feedbackEl.innerHTML = html;
+            feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('quizTheme', themeName);
+        }
+
+        function toggleHeader(forceState) {
+            // Determine current state based on class presence
+            const isCurrentlyPinned = !mainHeader.classList.contains('unpinned');
+            
+            // If forceState is provided (boolean), use it. Otherwise toggle current state.
+            const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyPinned;
+
+            if (newState) {
+                // Pin
+                mainHeader.classList.remove('unpinned');
+                pinBtn.classList.add('pin-active');
+                localStorage.setItem('headerPinned', 'true');
+            } else {
+                // Unpin
+                mainHeader.classList.add('unpinned');
+                pinBtn.classList.remove('pin-active');
+                localStorage.setItem('headerPinned', 'false');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initQuiz);
+
+    </script>
+</body>
+</html>
